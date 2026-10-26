@@ -35,11 +35,13 @@ test:
   stage: test
   script:
     - uv run pytest tests/ -v
+  needs: lint
 
 # Train the model. Only runs when you click the `run` button in the interface.
 train:
   stage: train
   when: manual
+  needs: test
   script:
     - uv run python -m ci_cd.train
   # Keep the trained model, so you can download it from the job page.
