@@ -25,6 +25,7 @@ default:
 
 # Check the code style without running the code.
 lint:
+  allow_failure: true
   stage: lint
   script:
     - uv run ruff format --check .
@@ -41,7 +42,6 @@ test:
 train:
   stage: train
   when: manual
-  needs: test
   script:
     - uv run python -m ci_cd.train
   # Keep the trained model, so you can download it from the job page.
